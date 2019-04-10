@@ -27,16 +27,21 @@ unsigned long pages[NR_LRU_LISTS];
 int lru;
 
 static int OS2_show(struct seq_file *m, void *v){
-seq_printf(m, "Proceso:\n");
-seq_printf(m, "\n");
+//seq_printf(m, "Proceso:\n");
+//seq_printf(m, "\n");
+seq_printf(m,"Carne:  9430901\n");
+seq_printf(m,"Nombre: Celso Salvador Soto Taracena\n");
+seq_printf(m,"Sistema operativo: CentOS 7\n");
 
 #define K(x) ((x) << (PAGE_SHIFT - 10))
 si_meminfo(&i);
 for (lru = LRU_BASE; lru < NR_LRU_LISTS; lru++)
 pages[lru] = global_page_state(NR_LRU_BASE + lru);
 
-seq_printf(m,"MemTotal: %8lu kB\n",K(i.totalram));
-seq_printf(m,"MemFree: %8lu kB\n",K(i.freeram));
+seq_printf(m,"Memoria total: %8lu kB\n",K(i.totalram));
+seq_printf(m,"Memoria libre: %8lu kB\n",K(i.freeram));
+seq_printf(m,"Porciento utilizado : %8lu kB\n",K(i.totalram-i.freeram));
+/*
 seq_printf(m,"Buffers: %8lu kB\n",K(i.bufferram));
 seq_printf(m,"Active: %8lu kB\n",K(pages[LRU_ACTIVE_ANON] + pages[LRU_ACTIVE_FILE]));
 seq_printf(m,"Inactive: %8lu kB\n",K(pages[LRU_INACTIVE_ANON] + pages[LRU_INACTIVE_FILE]));
@@ -57,7 +62,7 @@ seq_printf(m,"MmapCopy: %8lu kB\n",K((unsigned long) atomic_long_read(&mmap_page
 #endif
 seq_printf(m,"SwapTotal: %8lu kB\n",K(i.totalswap));
 seq_printf(m,"SwapFree: %8lu kB\n",K(i.freeswap));
-#undef K
+#undef K*/
 return 0;
 }
 
@@ -102,7 +107,7 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
 
 static void __exit final(void) //Salida de modulo
 {   
-	printk(KERN_INFO "Limpiando.\n");
+	printk(KERN_INFO "Sistemas Operativos 1.\n");
 }
 
 static int meminfo_proc_open(struct inode *inode, struct file *file)
@@ -120,6 +125,7 @@ static const struct file_operations meminfo_proc_fops = {
 
 static int __init inicio(void)
 {
+	printk(KERN_INFO "Carne: 9430901.\n");
 	proc_create("memo_9430901", 0, NULL, &meminfo_proc_fops);
 	return 0;
 }

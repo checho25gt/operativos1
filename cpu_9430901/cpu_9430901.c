@@ -45,7 +45,7 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
 
 static void __exit final(void) //Salida de modulo
 {   
-	printk(KERN_INFO "Limpiando.\n");
+	printk(KERN_INFO "Sistemas Operativos 1.\n");
 }
 
 static int meminfo_proc_open(struct inode *inode, struct file *file)
@@ -62,6 +62,7 @@ static const struct file_operations meminfo_proc_fops = {
 
 static int __init inicio(void) //Escribe archivo en /proc
 {
+	printk(KERN_INFO "Nombre: Celso Soto.\n");
         proc_create("cpu_9430901", 0, NULL, &meminfo_proc_fops);
         return 0;
 }
